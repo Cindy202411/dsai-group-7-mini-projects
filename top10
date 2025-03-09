@@ -1,0 +1,131 @@
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Product Name</th>
+      <th>Product URL</th>
+      <th>Product Price</th>
+      <th>Rating</th>
+      <th>Numeric Rating</th>
+      <th>Rank</th>
+      <th>Total Ratings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>Dr. Brown's Original Nipple, Level 3 (6m+), (P...</td>
+      <td>https://www.amazon.sg/Dr-Browns-Original-Nippl...</td>
+      <td>S$14.67</td>
+      <td>4.8 out of 5 stars</td>
+      <td>4.8</td>
+      <td>11</td>
+      <td>93903.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Organic Butter Breastfeeding Cream by Earth Ma...</td>
+      <td>https://www.amazon.sg/Breastfeeding-Earth-Mama...</td>
+      <td>S$21.80</td>
+      <td>4.7 out of 5 stars</td>
+      <td>4.7</td>
+      <td>10</td>
+      <td>54287.0</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>WaterWipes Sensitive Baby Wipes, 720 Count (12...</td>
+      <td>https://www.amazon.sg/WaterWipes-Sensitive-Wip...</td>
+      <td>S$69.90</td>
+      <td>4.7 out of 5 stars</td>
+      <td>4.7</td>
+      <td>1</td>
+      <td>26223.0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Aveeno Baby Mommy &amp; Me Daily Bathtime Gift Set...</td>
+      <td>https://www.amazon.sg/Aveeno-Baby-Bathtime-Inc...</td>
+      <td>S$34.40</td>
+      <td>4.8 out of 5 stars</td>
+      <td>4.8</td>
+      <td>20</td>
+      <td>21099.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Safety 1st Sleepy Baby Nail Clipper</td>
+      <td>https://www.amazon.sg/Safety-1st-Sleepy-Baby-C...</td>
+      <td>S$18.76</td>
+      <td>4.4 out of 5 stars</td>
+      <td>4.4</td>
+      <td>13</td>
+      <td>11260.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Pampers Ninjamas, Bedwetting Overnight Diapers...</td>
+      <td>https://www.amazon.sg/Ninjamas-Bedwetting-Over...</td>
+      <td>S$61.72</td>
+      <td>4.5 out of 5 stars</td>
+      <td>4.5</td>
+      <td>5</td>
+      <td>10765.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Baby Proof Cabinet Latches, Childproof Drawer ...</td>
+      <td>https://www.amazon.sg/Cabinet-Childproof-Adhes...</td>
+      <td>S$23.51</td>
+      <td>4.4 out of 5 stars</td>
+      <td>4.4</td>
+      <td>15</td>
+      <td>8871.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>MAM Easy Active Baby Bottle 11 oz with Bonus, ...</td>
+      <td>https://www.amazon.sg/MAM-Skinsoft-Silicone-Er...</td>
+      <td>S$36.18</td>
+      <td>4.6 out of 5 stars</td>
+      <td>4.6</td>
+      <td>12</td>
+      <td>7737.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Dreamegg White Noise Machine - Portable Sound ...</td>
+      <td>https://www.amazon.sg/Dreamegg-White-Noise-Mac...</td>
+      <td>S$46.09</td>
+      <td>4.6 out of 5 stars</td>
+      <td>4.6</td>
+      <td>7</td>
+      <td>7340.0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Sudocrem Antiseptic Healing Cream, 125 grams</td>
+      <td>https://www.amazon.sg/Sudocrem-Antiseptic-Heal...</td>
+      <td>S$13.79</td>
+      <td>4.8 out of 5 stars</td>
+      <td>4.8</td>
+      <td>19</td>
+      <td>6529.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
