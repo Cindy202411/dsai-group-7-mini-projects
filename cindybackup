@@ -1,0 +1,197 @@
+# %%
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from bs4 import BeautifulSoup
+import time
+
+# Set up Selenium WebDriver
+options = webdriver.ChromeOptions()
+options.add_argument("--headless")  # Run in headless mode
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+
+# Automatically download and manage ChromeDriver
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=options)
+
+# Define URL
+URL = "https://www.amazon.sg/gp/bestsellers/baby/"
+
+# Open the Amazon Best Sellers page
+driver.get(URL)
+time.sleep(5)  # Allow time for the page to load
+
+# Parse the page with BeautifulSoup
+soup = BeautifulSoup(driver.page_source, "html.parser")
+
+# Find product containers
+products = soup.find_all("div", class_="p13n-sc-uncoverable-faceout")
+
+# List to store scraped data
+scraped_data = []
+
+for product in products:
+    try:
+        # Extract Product Name
+        name_tag = product.find("div", class_=lambda x: x and "p13n-sc-css-line-clamp" in x)
+        product_name = name_tag.text.strip() if name_tag else "N/A"
+
+        # Extract Product URL
+        link_tag = product.find("a", class_="a-link-normal")
+        product_url = "https://www.amazon.sg" + link_tag["href"] if link_tag else "N/A"
+
+        # Extract Price
+        price_tag = product.find("span", class_=lambda x: x and "price" in x.lower())
+        alt_price_tag = product.find("span", class_="a-price-whole")  # Alternative price location
+        product_price = price_tag.text.strip() if price_tag else (alt_price_tag.text.strip() if alt_price_tag else "N/A")
+
+        # Extract Ratings
+        rating_tag = product.find("span", class_="a-icon-alt")
+        rating = rating_tag.text.strip() if rating_tag else "N/A"
+
+        # Extract Number of Reviews
+        reviews_tag = product.find("span", class_="a-size-small", string=lambda x: x and "rating" in x.lower())
+        num_reviews = reviews_tag.text.strip() if reviews_tag else "N/A"
+
+        # Append to list
+        scraped_data.append({
+            "Product Name": product_name,
+            "Product URL": product_url,
+            "Product Price": product_price,
+            "Rating": rating,
+            "Number of Reviews": num_reviews
+        })
+
+    except Exception as e:
+        print(f"Error processing product: {e}")
+
+# Close the driver
+driver.quit()
+
+# Print scraped data
+for item in scraped_data:
+    print(item)
+
+# %%
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from bs4 import BeautifulSoup
+import time
+import csv
+
+# Set up Selenium WebDriver
+options = webdriver.ChromeOptions()
+options.add_argument("--headless")  # Run in headless mode
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+
+# Automatically download and manage ChromeDriver
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=options)
+
+# Define URL
+URL = "https://www.amazon.sg/gp/bestsellers/baby/"
+
+# Open the Amazon Best Sellers page
+driver.get(URL)
+time.sleep(5)  # Allow time for the page to load
+
+# Scroll to the bottom of the page to load all products
+def scroll_to_bottom():
+    last_height = driver.execute_script("return document.body.scrollHeight")
+    while True:
+        # Scroll down to the bottom
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(2)  # Wait for new products to load
+
+        # Calculate new scroll height and compare with last scroll height
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        if new_height == last_height:
+            break  # Stop scrolling if no new content is loaded
+        last_height = new_height
+
+# Scroll to load all products
+scroll_to_bottom()
+
+# Parse the page with BeautifulSoup
+soup = BeautifulSoup(driver.page_source, "html.parser")
+
+# Find product containers
+products = soup.find_all("div", class_="p13n-sc-uncoverable-faceout")
+
+# List to store scraped data
+scraped_data = []
+
+for product in products:
+    try:
+        # Extract Product Name
+        name_tag = product.find("div", class_=lambda x: x and "p13n-sc-css-line-clamp" in x)
+        product_name = name_tag.text.strip() if name_tag else "N/A"
+
+        # Extract Product URL
+        link_tag = product.find("a", class_="a-link-normal")
+        product_url = "https://www.amazon.sg" + link_tag["href"] if link_tag else "N/A"
+
+        # Extract Price
+        price_tag = product.find("span", class_=lambda x: x and "price" in x.lower())
+        alt_price_tag = product.find("span", class_="a-price-whole")  # Alternative price location
+        product_price = price_tag.text.strip() if price_tag else (alt_price_tag.text.strip() if alt_price_tag else "N/A")
+
+        # Extract Ratings
+        rating_tag = product.find("span", class_="a-icon-alt")
+        rating = rating_tag.text.strip() if rating_tag else "N/A"
+
+        # Append to list (excluding Number of Reviews)
+        scraped_data.append({
+            "Product Name": product_name,
+            "Product URL": product_url,
+            "Product Price": product_price,
+            "Rating": rating
+        })
+
+    except Exception as e:
+        print(f"Error processing product: {e}")
+
+# Close the driver
+driver.quit()
+
+# Write scraped data to a CSV file
+csv_filename = "amazon_products.csv"
+with open(csv_filename, mode="w", newline="", encoding="utf-8") as file:
+    fieldnames = ["Product Name", "Product URL", "Product Price", "Rating"]
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+
+    # Write the header
+    writer.writeheader()
+
+    # Write the data rows
+    for item in scraped_data:
+        writer.writerow(item)
+
+print(f"Scraping completed! Data saved to {csv_filename}.")
+
+# %%
+# to save to items above in a csv file
+import pandas as pd
+df = pd.DataFrame(scraped_data)
+df
+
+
+
+# %%
+df['Rating'] = df['Rating'].astype(str).fillna('')
+df['Numeric Rating'] = df['Rating'].str.extract(r'(\d+\.?\d*)').astype(float)
+df
+
+# %%
+# replace numeric rating with 0 if it is not available
+df['Numeric Rating'] = df['Numeric Rating'].fillna(0)
+df
+
+# %%
